@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useBookStore } from "./zustore";
 
 function App() {
+  const { amount, author, updateAmount, sumAmount } = useBookStore((state) => ({
+    amount: state.amount,
+    author: state.author,
+    updateAmount: state.updateAmount,
+    sumAmount: state.sumAmount,
+  }));
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Author : {author}</h1>
+      <span>
+        Amount : <strong>{amount}</strong>
+      </span>
+      <button onClick={() => sumAmount(100)}>Pluse 100</button>
+      <button onClick={() => updateAmount(0)}>Clear Amount</button>
     </div>
   );
 }
